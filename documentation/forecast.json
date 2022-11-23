@@ -1,0 +1,44 @@
+
+{
+  "coord": {
+    "lon": 5.0833,
+    "lat": 51.55
+  },
+  "weather": [
+    {
+      "id": 804,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "icon": "04d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 282.53,
+    "feels_like": 279.09,
+    "temp_min": 281.39,
+    "temp_max": 283.83,
+    "pressure": 994,
+    "humidity": 81
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 7.72,
+    "deg": 170
+  },
+  "clouds": {
+    "all": 100
+  },
+  "dt": 1669203891,
+  "sys": {
+    "type": 2,
+    "id": 2009239,
+    "country": "NL",
+    "sunrise": 1669187463,
+    "sunset": 1669218082
+  },
+  "timezone": 3600,
+  "id": 2746300,
+  "name": "Gemeente Tilburg",
+  "cod": 200
+}

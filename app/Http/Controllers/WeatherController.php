@@ -14,9 +14,6 @@ class WeatherController extends Controller
     {
     }
 
-
-
-
     /**
      * Return a view with the weather dropdown and (if city selected) forecast.
      *
@@ -27,7 +24,7 @@ class WeatherController extends Controller
     {
         $cities = array_keys(config('weather.cities'));
         $city = $request->get('city');
-        $forecast = $this->client->getForecast($city);
+        $forecast = $this->client->getForecast($city); // \App\Models\Forecast
 
         return view('weather', [
             'cities' => $cities,

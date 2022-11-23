@@ -2,14 +2,15 @@
 
 namespace App\Adapters;
 
+use \App\Models\Forecast;
+use stdClass;
+
 abstract class WeatherAdapter
 {
     /**
-     * Must implement getForecast
-     *
      * @param float $longitude
      * @param float $latitude
-     * @return string
+     * @return Forecast
      */
-    abstract public function getForecast(float $longitude, float $latitude): string;
+    abstract public function getForecast(float $longitude, float $latitude): Forecast;
 }

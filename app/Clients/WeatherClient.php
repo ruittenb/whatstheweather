@@ -3,7 +3,9 @@
 namespace App\Clients;
 
 use App\Adapters\OpenWeatherMapAdapter;
+use App\Adapters\TestWeatherAdapter;
 use App\Adapters\WeatherAdapter;
+use App\Models\Forecast;
 
 class WeatherClient
 {
@@ -28,6 +30,7 @@ class WeatherClient
     {
         match ($weather_api) {
             'openweathermap' => $this->adapter = new OpenWeatherMapAdapter(),
+            'test' => $this->adapter = new TestWeatherAdapter(),
             default => throw new Exception(
                 "Unknown weather API '$weather_api'"
             ),
@@ -37,7 +40,7 @@ class WeatherClient
     /**
      * Bootstrap any application services.
      *
-     * @return string
+     * @return Forecast
      */
     public function getForecast($city)
     {
