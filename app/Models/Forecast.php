@@ -9,21 +9,49 @@ class Forecast extends Model
 {
     use HasFactory;
 
-    public function __construct(
-        private readonly string $temperature = 'unknown',
-        private readonly string $wind_force = 'unknown',
-        private readonly string $wind_direction = 'unknown',
-    )
-    {}
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'temperature',
+        'wind_force',
+        'wind_direction',
+    ];
+
+    /**
+     * Constructor
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct([
+            ...$attributes,
+            'temperature'    => $attributes['temperature']    ?: 'unknown',
+            'wind_force'     => $attributes['wind_force']     ?: 'unknown',
+            'wind_direction' => $attributes['wind_direction'] ?: 'unknown',
+        ]);
+    }
 
     /**
      * Convert the forecast to ascii string
      * @return string
      */
-    public function toText()
+    public function toText(): string
     {
         return "Temperature: $this->temperature; Wind: force $this->wind_force, direction $this->wind_direction.";
     }
 
-    // TODO toHtml()
+    public function toJson($options = 0): string
+    {
+        return json_encode([
+            'temperature' => $this->temperature,
+            'wind' => [
+                'force' => $this->wind_force,
+                'direction' => $this->wind_direction,
+            ],
+        ]);
+    }
 }

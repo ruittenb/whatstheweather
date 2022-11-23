@@ -37,10 +37,10 @@ class OpenWeatherMapAdapter extends WeatherAdapter
         $response = curl_exec($curl);
         $forecast_data = json_decode($response);
 
-        return new Forecast(
-            temperature: $forecast_data->main->temp, // or translate to Celcius
-            wind_force: $forecast_data->wind->speed, // or translate to Beaufort
-            wind_direction: $forecast_data->wind->deg, // or translate to cardinal directions
-        );
+        return new Forecast([
+            'temperature' => $forecast_data->main->temp, // or translate to Celsius
+            'wind_force' => $forecast_data->wind->speed, // or translate to Beaufort
+            'wind_direction' => $forecast_data->wind->deg, // or translate to cardinal directions
+        ]);
     }
 }

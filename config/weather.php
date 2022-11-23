@@ -30,15 +30,19 @@ return [
     'cities' => [
         'Nijmegen' => [
             'longitude' => 51.8475, // 51°50′51″N
-            'latitude' => 5.8625,   // 05°51′45″E
+            'latitude'  =>  5.8625, //  5°51′45″E
         ],
         'Hoorn' => [
-            'longitude' => 52.65, // 52°39′N
-            'latitude' => 5.0677, //  5°04′E
+            'longitude' => 52.65,   // 52°39′N
+            'latitude'  =>  5.0667, //  5°04′E
         ],
         'Tilburg' => [
-            'longitude' => 51.55, // 51°33′N
-            'latitude' => 5.0833, //  5°05′E
+            'longitude' => 51.55,   // 51°33′N
+            'latitude'  =>  5.0833, //  5°05′E
         ],
+        'Amsterdam' => [
+            'longitude' => 52.3667, // 52°22′N
+            'latitude'  =>  4.9,    //  4°54′E
+        ]
     ],
 ];

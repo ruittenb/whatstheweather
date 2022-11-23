@@ -6,6 +6,7 @@ use App\Adapters\OpenWeatherMapAdapter;
 use App\Adapters\TestWeatherAdapter;
 use App\Adapters\WeatherAdapter;
 use App\Models\Forecast;
+use Exception;
 
 class WeatherClient
 {
@@ -25,6 +26,8 @@ class WeatherClient
     /**
      * @param string $api_name
      * @return void
+     * @throws Exception
+     *   When API name is not found in config
      */
     public function setWeatherApi(string $api_name): void
     {
@@ -40,20 +43,23 @@ class WeatherClient
     /**
      * Bootstrap any application services.
      *
+     * @param string $city
      * @return Forecast
+     * @throws Exception
+     *   When city is unknown or misconfigured
      */
-    public function getForecast($city)
+    public function getForecast(string $city): Forecast
     {
         $params = config('weather.cities');
         if (!array_key_exists($city, $params)) {
-            return "Unknown city: '$city'";
+            throw new Exception("Unknown city: '$city'");
         }
         $city_coords = $params[$city];
         if (
             !array_key_exists('longitude', $city_coords) ||
             !array_key_exists('latitude', $city_coords)
         ) {
-            return "City misconfigured: '$city' must have both 'latitude' and 'longitude'";
+            throw new Exception("Misconfigured city: '$city' must have both 'latitude' and 'longitude'");
         }
         $longitude = $city_coords['longitude'];
         $latitude = $city_coords['latitude'];

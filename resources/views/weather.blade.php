@@ -51,7 +51,7 @@
 
         @if ($forecast)
             <div id="forecast">
-                {{ $forecast->toText() }}
+                {{ $forecast->toJson() }}
             </div>
         @endif
 
