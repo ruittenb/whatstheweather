@@ -8,12 +8,19 @@ return [
     'weather_api' => 'openweathermap',
 
     /**
-     * API parameters for Openweathermap API
-     * @see https://openweathermap.org/current
+     * API parameters
      */
-    'openweathermap' => [
-        'url' => 'https://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&appid=%s',
-        'key' => env('OPENWEATHERMAP_KEY', ''),
+    'apis' => [
+        /**
+         * @see https://openweathermap.org/current
+         */
+        'openweathermap' => [
+            'url' => 'https://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&appid=%s',
+            'key' => env('OPENWEATHERMAP_KEY', ''),
+        ],
+
+        'test' => [
+        ],
     ],
 
     /**

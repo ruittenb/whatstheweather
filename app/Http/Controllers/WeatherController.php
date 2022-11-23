@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Clients\WeatherClient;
 use Illuminate\Http\Request;
 
 class WeatherController extends Controller
 {
+    /**
+     * Constructor
+     */
+    function __construct(private WeatherClient $client = new WeatherClient())
+    {
+    }
+
+
+
+
     /**
      * Return a view with the weather dropdown and (if city selected) forecast.
      *
@@ -15,12 +26,12 @@ class WeatherController extends Controller
     public function show(Request $request)
     {
         $cities = array_keys(config('weather.cities'));
-        $current_city = $request->get('city');
-        $forecast = 'Weer voor een feestje';
+        $city = $request->get('city');
+        $forecast = $this->client->getForecast($city);
 
         return view('weather', [
             'cities' => $cities,
-            'current_city' => $current_city,
+            'current_city' => $city,
             'forecast' => $forecast,
         ]);
     }
