@@ -16,23 +16,23 @@ class WeatherClient
      *
      * @return void
      */
-    public function __construct(string $maybe_weather_api = '')
+    public function __construct(string $maybe_api_name = '')
     {
-        $weather_api = $maybe_weather_api ?: config('weather.weather_api');
-        $this->setWeatherApi($weather_api);
+        $api_name = $maybe_api_name ?: config('weather.api_name');
+        $this->setWeatherApi($api_name);
     }
 
     /**
-     * @param string $weather_api
+     * @param string $api_name
      * @return void
      */
-    public function setWeatherApi(string $weather_api): void
+    public function setWeatherApi(string $api_name): void
     {
-        match ($weather_api) {
+        match ($api_name) {
             'openweathermap' => $this->adapter = new OpenWeatherMapAdapter(),
             'test' => $this->adapter = new TestWeatherAdapter(),
             default => throw new Exception(
-                "Unknown weather API '$weather_api'"
+                "Unknown weather API '$api_name'"
             ),
         };
     }

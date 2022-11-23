@@ -5,8 +5,8 @@ return [
     /**
      * Which API to use?
      */
-    'weather_api' => 'openweathermap',
-    //'weather_api' => 'test',
+    'api_name' => 'openweathermap',
+    //'api_name' => 'test',
 
     /**
      * API parameters

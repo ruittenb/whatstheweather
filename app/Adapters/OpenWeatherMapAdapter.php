@@ -24,6 +24,12 @@ class OpenWeatherMapAdapter extends WeatherAdapter
         return $this->_fetchForecast($url);
     }
 
+    /**
+     * @see https://openweathermap.org/current
+     *
+     * @param $url
+     * @return Forecast
+     */
     protected function _fetchForecast($url): Forecast
     {
         $curl = curl_init($url);

@@ -8,7 +8,7 @@ use stdClass;
 class TestWeatherAdapter extends WeatherAdapter
 {
     /**
-     * Fetch forecast from remote API.
+     * Fetch example forecast
      *
      * @param float $longitude
      * @param float $latitude
