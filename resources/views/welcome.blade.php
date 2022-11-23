@@ -45,6 +45,15 @@
                     </svg>
                 </div>
 
+                <h1>Weather Forecast: What's the Weather</h1>
+
+                Get the weather in:
+                <select>
+                    @foreach ($cities as $city)
+                        <option value="{{ $city }}">{{ $city }}</option>
+                    @endforeach
+                </select>
+
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
                         <div class="p-6">
