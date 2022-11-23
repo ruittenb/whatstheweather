@@ -17,16 +17,16 @@ class WeatherController extends Controller
     }
 
     /**
-     * Return a view with the weather dropdown and (if city selected) forecast.
+     * Return a Json string with the forecast data
      *
      * @param Request $request
      * @return string
      */
     public function show(Request $request): string
     {
+        $city = $request->input('city', 'unknown') ?: 'unknown';
         try {
-            $city = $request->get('city');
-            $forecast = $this->client->getForecast($city)->toJson();
+            $forecast = $this->client->getForecast($city)->toJson(); // via \App\Models\Forecast
         } catch (Exception $e) {
             $forecast = '{}'; // empty json object
         }

@@ -45,13 +45,16 @@
         <select name="city">
             <option value="">Please select</option>
             @foreach ($cities as $city)
-                <option value="{{ $city }}" {{ ($city === $current_city) ? 'selected' : '' }}>{{ $city }}</option>
+                <option
+                    value="{{ $city }}"
+                    {{ ($city === $current_city) ? 'selected' : '' }}
+                >{{ $city }}</option>
             @endforeach
         </select>
 
         @if ($forecast)
             <div id="forecast">
-                {{ $forecast->toJson() }}
+                {{ $forecast }}
             </div>
         @endif
 

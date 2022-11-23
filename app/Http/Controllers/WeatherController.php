@@ -24,17 +24,13 @@ class WeatherController extends Controller
      * @param Request $request
      * @return Application|Factory|View
      */
-    public function show(Request $request)
+    public function show(Request $request): View|Factory|Application
     {
+        $city = $request->input('city', 'unknown') ?: 'unknown';
         try {
-            $city = $request->get('city');
+            $forecast = $this->client->getForecast($city)->toJson(); // via \App\Models\Forecast
         } catch (Exception $e) {
-            $city = 'unknown';
-        }
-        try {
-            $forecast = $this->client->getForecast($city); // \App\Models\Forecast
-        } catch (Exception $e) {
-            $forecast = null;
+            $forecast = '{}'; // empty json object
         }
 
         $cities = array_keys(config('weather.cities'));

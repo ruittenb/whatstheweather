@@ -36,14 +36,10 @@ class Forecast extends Model
     }
 
     /**
-     * Convert the forecast to ascii string
+     * Convert the forecast to json string
+     * @param int $options
      * @return string
      */
-    public function toText(): string
-    {
-        return "Temperature: $this->temperature; Wind: force $this->wind_force, direction $this->wind_direction.";
-    }
-
     public function toJson($options = 0): string
     {
         return json_encode([

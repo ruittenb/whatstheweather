@@ -16,7 +16,7 @@ return [
          * @see https://openweathermap.org/current
          */
         'openweathermap' => [
-            'url' => 'https://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&appid=%s',
+            'url' => 'https://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&appid=%s&units=metric',
             'key' => env('OPENWEATHERMAP_KEY', ''),
         ],
 
