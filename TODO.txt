@@ -1,3 +1,5 @@
 
  - Vue
  - Guzzle https://docs.guzzlephp.org/en/stable/
+ - php artisan script to periodically fetch weather and store in database
+

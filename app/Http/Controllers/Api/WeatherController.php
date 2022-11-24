@@ -6,6 +6,7 @@ use App\Clients\WeatherClient;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Exception;
+use stdClass;
 
 class WeatherController extends Controller
 {
@@ -17,18 +18,19 @@ class WeatherController extends Controller
     }
 
     /**
-     * Return a Json string with the forecast data
+     * Return an object with the forecast data
      *
      * @param Request $request
-     * @return string
+     * @return stdClass
      */
-    public function show(Request $request): string
+    public function show(Request $request): stdClass
     {
         $city = $request->input('city', 'unknown') ?: 'unknown';
         try {
-            $forecast = $this->client->getForecast($city)->toJson(); // via \App\Models\Forecast
-        } catch (Exception $e) {
-            $forecast = '{}'; // empty json object
+            $forecast = $this->client->getForecast($city)->toObject(); // via \App\Models\Forecast
+        } catch (Exception) {
+            // TODO add error message to object
+            $forecast = new stdClass();
         }
 
         return $forecast;

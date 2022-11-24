@@ -43,6 +43,10 @@ return [
         'Amsterdam' => [
             'longitude' => 52.3667, // 52°22′N
             'latitude'  =>  4.9,    //  4°54′E
-        ]
+        ],
+        'Den Bosch' => [
+            'longitude' => 51.6833, // 51°41′N
+            'latitude'  =>  5.3,    //  5°18′E
+        ],
     ],
 ];

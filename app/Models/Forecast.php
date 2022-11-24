@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Helpers\Conversions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use stdClass;
 
 class Forecast extends Model
 {
     use HasFactory;
-
 
     /**
      * The attributes that are mass assignable.
@@ -16,9 +17,13 @@ class Forecast extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'city',
+        'longitude',
+        'latitude',
         'temperature',
         'wind_force',
         'wind_direction',
+        'kind',
     ];
 
     /**
@@ -29,25 +34,41 @@ class Forecast extends Model
     {
         parent::__construct([
             ...$attributes,
-            'temperature'    => $attributes['temperature']    ?: 'unknown',
-            'wind_force'     => $attributes['wind_force']     ?: 'unknown',
-            'wind_direction' => $attributes['wind_direction'] ?: 'unknown',
+            'city'           => $attributes['city']           ?: 'unknown',
+            'longitude'      => $attributes['longitude']      ?: null,
+            'latitude'       => $attributes['latitude']       ?: null,
+            'temperature'    => $attributes['temperature']    ?: null,
+            'wind_force'     => $attributes['wind_force']     ?: null,
+            'wind_direction' => $attributes['wind_direction'] ?: '',
+            'kind'           => '',
         ]);
+        $this->setAttribute('kind', Conversions::kindOfWeather($this));
     }
 
     /**
-     * Convert the forecast to json string
-     * @param int $options
-     * @return string
+     * Convert the forecast to stdClass
+     * @return stdClass
      */
-    public function toJson($options = 0): string
+    public function toObject(): stdClass
     {
-        return json_encode([
+        return (object)[
+            'city' => $this->city,
             'temperature' => $this->temperature,
             'wind' => [
                 'force' => $this->wind_force,
                 'direction' => $this->wind_direction,
             ],
-        ]);
+            'kind' => $this->kind,
+        ];
+    }
+
+    /**
+     * Convert the forecast to json string
+     * @param int $options - for conforming to parent function
+     * @return string
+     */
+    public function toJson($options = 0): string
+    {
+        return json_encode($this->toObject());
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Exception;
+use stdClass;
 
 class WeatherController extends Controller
 {
@@ -19,7 +20,7 @@ class WeatherController extends Controller
     }
 
     /**
-     * Return a view with the weather dropdown and (if city selected) forecast.
+     * Pass the city/cities and forecast data to the view.
      *
      * @param Request $request
      * @return Application|Factory|View
@@ -28,9 +29,10 @@ class WeatherController extends Controller
     {
         $city = $request->input('city', 'unknown') ?: 'unknown';
         try {
-            $forecast = $this->client->getForecast($city)->toJson(); // via \App\Models\Forecast
-        } catch (Exception $e) {
-            $forecast = '{}'; // empty json object
+            $forecast = $this->client->getForecast($city)->toObject(); // via \App\Models\Forecast
+        } catch (Exception) {
+            // TODO add error message to object
+            $forecast = new stdClass();
         }
 
         $cities = array_keys(config('weather.cities'));

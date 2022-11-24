@@ -3,6 +3,8 @@
 namespace App\Adapters;
 
 use App\Models\Forecast;
+use App\Helpers\Conversions;
+use GuzzleHttp\Client as HttpClient;
 use stdClass;
 
 class OpenWeatherMapAdapter extends WeatherAdapter
@@ -32,15 +34,20 @@ class OpenWeatherMapAdapter extends WeatherAdapter
      */
     protected function _fetchForecast($url): Forecast
     {
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($curl);
-        $forecast_data = json_decode($response);
+        $http_client = new HttpClient();
+        $response = $http_client->request('GET', $url);
+        // if ($response->getStatusCode() !== '200') {
+        // }
+        $forecast_data = json_decode($response->getBody());
 
         return new Forecast([
-            'temperature' => $forecast_data->main->temp, // or translate to Celsius
-            'wind_force' => $forecast_data->wind->speed, // or translate to Beaufort
-            'wind_direction' => $forecast_data->wind->deg, // or translate to cardinal directions
+            'city'           => $forecast_data->name,
+            'longitude'      => $forecast_data->coord->lon,
+            'latitude'       => $forecast_data->coord->lat,
+            'temperature'    => $forecast_data->main->temp,
+            'wind_force'     => Conversions::speedToBeaufort($forecast_data->wind->speed),
+            'wind_direction' => Conversions::angleToCompassDirection($forecast_data->wind->deg),
+            // 'kind' will be determined by Forecast model
         ]);
     }
 }
