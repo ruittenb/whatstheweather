@@ -67,10 +67,14 @@ class Conversions
     {
         if ($forecast->wind_force > 7) {
             $kind = 'Batten down the hatches!';
+        } else if ($forecast->temperature < 0) {
+            $kind = 'Wear a warm coat and sweater.';
         } else if ($forecast->temperature < 10) {
-            $kind = 'Put on a warm sweater.';
-        } else if ($forecast->temperature > 28) {
+            $kind = 'Wear a warm sweater.';
+        } else if ($forecast->temperature > 30) {
             $kind = 'Time for a barbecue.';
+        } else if ($forecast->temperature > 20) {
+            $kind = 'Nice for a walk on the beach.';
         } else {
             $kind = 'No advice for this weather.';
         }

@@ -63,6 +63,11 @@ class WeatherClient
         }
         $longitude = $city_coords['longitude'];
         $latitude = $city_coords['latitude'];
-        return $this->adapter->getForecast($longitude, $latitude);
+        $forecast = $this->adapter->getForecast($longitude, $latitude);
+        // Some APIs (OpenWeatherMap) don't fill in the city name. Prevent it from being empty.
+        if ($forecast->getAttribute('city') === '') {
+            $forecast->setAttribute('city', $city);
+        }
+        return $forecast;
     }
 }

@@ -28,7 +28,6 @@ class WeatherController extends Controller
         $city = $request->input('city', 'unknown') ?: 'unknown';
         try {
             $forecast = $this->client->getForecast($city);
-            //$forecast->save();
             $forecast_data = $forecast->toObject();
         } catch (Exception) {
             // TODO add error message to object

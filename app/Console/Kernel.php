@@ -10,12 +10,18 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
+     * Examples:
+     *   $schedule->command('inspire')->hourly();
+     *   $schedule->call(function () {
+     *       DB::table('recent_users')->delete();
+     *   })->daily();
+     *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('weather:get-all')->everyFifteenMinutes()->withoutOverlapping();
     }
 
     /**

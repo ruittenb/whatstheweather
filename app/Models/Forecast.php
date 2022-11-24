@@ -34,7 +34,7 @@ class Forecast extends Model
     {
         parent::__construct([
             ...$attributes,
-            'city'           => $attributes['city']           ?: 'unknown',
+            'city'           => $attributes['city']           ?: '',
             'longitude'      => $attributes['longitude']      ?: null,
             'latitude'       => $attributes['latitude']       ?: null,
             'temperature'    => $attributes['temperature']    ?: null,

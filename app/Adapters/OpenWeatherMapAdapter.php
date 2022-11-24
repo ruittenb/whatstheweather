@@ -22,7 +22,7 @@ class OpenWeatherMapAdapter extends WeatherAdapter
     {
         $base_url = config('weather.apis.openweathermap.url');
         $key = config('weather.apis.openweathermap.key');
-        $url = sprintf($base_url, $longitude, $latitude, $key);
+        $url = sprintf($base_url, $latitude, $longitude, $key);
         return $this->_fetchForecast($url);
     }
 
@@ -36,7 +36,7 @@ class OpenWeatherMapAdapter extends WeatherAdapter
     {
         $http_client = new HttpClient();
         $response = $http_client->request('GET', $url);
-        // if ($response->getStatusCode() !== '200') {
+        // if ($response->getStatusCode() !== '200') { // TODO detect errors
         // }
         $forecast_data = json_decode($response->getBody());
 
