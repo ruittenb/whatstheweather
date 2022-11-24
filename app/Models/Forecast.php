@@ -61,14 +61,4 @@ class Forecast extends Model
             'kind' => $this->kind,
         ];
     }
-
-    /**
-     * Convert the forecast to json string
-     * @param int $options - for conforming to parent function
-     * @return string
-     */
-    public function toJson($options = 0): string
-    {
-        return json_encode($this->toObject());
-    }
 }

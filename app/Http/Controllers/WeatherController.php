@@ -36,6 +36,7 @@ class WeatherController extends Controller
         }
 
         $cities = array_keys(config('weather.cities'));
+        sort($cities); // there exists no sort() function that returns the sorted data
         return view('weather', [
             'cities' => $cities,
             'current_city' => $city,
