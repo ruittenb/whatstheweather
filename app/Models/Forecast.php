@@ -52,6 +52,8 @@ class Forecast extends Model
     public function toObject(): stdClass
     {
         return (object)[
+            // FIXME: This 'city' needs work: sometimes the OpenWeatherMap API returns different
+            // FIXME: names for the same city, like 'Gemeente Tilburg' alternating with 'Tilburg'.
             'city' => $this->city,
             'temperature' => $this->temperature,
             'wind' => [
