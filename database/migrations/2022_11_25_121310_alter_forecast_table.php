@@ -25,7 +25,7 @@ return new class extends Migration
                 ->restrictOnDelete();
         });
         echo "Starting data migration...\n";
-        foreach (Forecast::all() as $forecast) {
+        foreach (Forecast::with('advice')->get() as $forecast) {
             $advice = Advice::where('description', $forecast->kind)->first();
             if ($advice) {
                 $forecast->advice()->associate($advice);
@@ -48,7 +48,7 @@ return new class extends Migration
         Schema::table('forecasts', function (Blueprint $table) {
             $table->string('kind');
         });
-        foreach (Forecast::all() as $forecast) {
+        foreach (Forecast::with('advice')->get() as $forecast) {
             $forecast->kind = $forecast->advice->description;
             $forecast->save();
         }
