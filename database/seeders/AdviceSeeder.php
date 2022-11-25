@@ -24,6 +24,16 @@ class AdviceSeeder extends Seeder
      */
     public function run()
     {
+        // final record (in sort order)
+        Advice::factory()->create([
+            'sort_order' => Advice::NO_ADVICE, // large integer
+            'temperature_min' => null,
+            'temperature_max' => null,
+            'wind_force_min' => null,
+            'wind_force_max' => null,
+            'description' => 'No specific advice.',
+        ]);
+        // criteria records
         Advice::factory()->create([
             'sort_order' => 10,
             'temperature_min' => null,
@@ -81,14 +91,5 @@ class AdviceSeeder extends Seeder
             'description' => 'Go for a walk on the beach.',
         ]);
 
-        // final record
-        Advice::factory()->create([
-            'sort_order' => Advice::NO_ADVICE, // large integer
-            'temperature_min' => null,
-            'temperature_max' => null,
-            'wind_force_min' => null,
-            'wind_force_max' => null,
-            'description' => 'No specific advice.',
-        ]);
     }
 }

@@ -49,12 +49,12 @@ class WeatherController extends Controller
     {
         try {
             $city = $request->input('city', 'unknown') ?: 'unknown';
-            $forecast_table = DB::table('forecasts');
-            $forecast_data = $forecast_table
-                ->where('city', $city)
-                ->orderBy('created_at')
-                ->get()->all();
-            // $forecast_data = Forecast::query()->where('city', $city)->get();
+            //$forecast_table = DB::table('forecasts');
+            //$forecast_data = $forecast_table
+            //    ->where('city', $city)
+            //    ->orderBy('created_at')
+            //    ->get()->all();
+            $forecast_data = Forecast::where('city', $city)->get();
         } catch (Exception $e) {
             $forecast_data = [];
         }

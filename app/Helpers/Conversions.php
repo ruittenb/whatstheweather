@@ -70,10 +70,12 @@ class Conversions
         $advices = Advice::all()->sortBy('sort_order');
         foreach ($advices as $advice) {
             if (
+                /*
                 $advice->temperature_min === null || $advice->temperature_min <= $forecast->temperature and
                 $advice->temperature_max === null || $advice->temperature_max >= $forecast->temperature and
                 $advice->wind_force_min  === null || $advice->wind_force_min  <= $forecast->wind_force and
                 $advice->wind_force_max  === null || $advice->wind_force_max  >= $forecast->wind_force
+                */ true
             ) {
                 return $advice;
             }

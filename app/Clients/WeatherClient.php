@@ -16,6 +16,8 @@ class WeatherClient
      * Register any application services.
      *
      * @return void
+     * @throws Exception
+     *   When API name is not found in config
      */
     public function __construct(string $maybe_api_name = '')
     {
@@ -66,7 +68,8 @@ class WeatherClient
         $forecast = $this->adapter->getForecast($longitude, $latitude);
         // Some APIs (OpenWeatherMap) normalize the city name.
         // Since the normalization is not always consistent, undo it here.
-        $forecast->setAttribute('city', $city);
+        //$forecast->setAttribute('city', $city);
+        $forecast->city = $city;
         return $forecast;
     }
 }

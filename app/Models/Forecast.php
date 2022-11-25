@@ -41,13 +41,6 @@ class Forecast extends Model
 {
     use HasFactory;
 
-    public string $city;
-    public float $longitude;
-    public float $latitude;
-    public float $temperature;
-    public int $wind_force;
-    public string $wind_direction;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -68,7 +61,15 @@ class Forecast extends Model
      */
     public function __construct(array $attributes = [])
     {
-        parent::__construct($attributes);
+        parent::__construct([
+            ...$attributes,
+            'city'           => $attributes['city']           ?: '',
+            'longitude'      => $attributes['longitude']      ?: null,
+            'latitude'       => $attributes['latitude']       ?: null,
+            'temperature'    => $attributes['temperature']    ?: null,
+            'wind_force'     => $attributes['wind_force']     ?: null,
+            'wind_direction' => $attributes['wind_direction'] ?: '',
+        ]);
         $this->advice()->associate(Conversions::forecastToAdvice($this));
     }
 
