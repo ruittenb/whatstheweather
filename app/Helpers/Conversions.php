@@ -65,14 +65,6 @@ class Conversions
      */
     public static function forecastToAdvice(Forecast $forecast): string
     {
-        if ($forecast->wind_force > 7) {
-            $advice = 'Batten down the hatches!';
-        } else if ($forecast->temperature < 0) {
-            $advice = 'Wear a warm coat and sweater.';
-        } else if ($forecast->temperature < 10) {
-            $advice = 'Wear a warm sweater.';
-        } else if ($forecast->temperature > 30) {
-            $advice = 'Time for a barbecue.';
         } else if ($forecast->temperature > 20) {
             $advice = 'Nice for a walk on the beach.';
         } else {
