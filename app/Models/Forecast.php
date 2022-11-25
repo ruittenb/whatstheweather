@@ -63,12 +63,12 @@ class Forecast extends Model
     {
         parent::__construct([
             ...$attributes,
-            'city'           => $attributes['city']           ?: '',
-            'longitude'      => $attributes['longitude']      ?: null,
-            'latitude'       => $attributes['latitude']       ?: null,
-            'temperature'    => $attributes['temperature']    ?: null,
-            'wind_force'     => $attributes['wind_force']     ?: null,
-            'wind_direction' => $attributes['wind_direction'] ?: '',
+            'city'           => $attributes['city']           ?? '',
+            'longitude'      => $attributes['longitude']      ?? null,
+            'latitude'       => $attributes['latitude']       ?? null,
+            'temperature'    => $attributes['temperature']    ?? null,
+            'wind_force'     => $attributes['wind_force']     ?? null,
+            'wind_direction' => $attributes['wind_direction'] ?? '',
         ]);
         $this->advice()->associate(Conversions::forecastToAdvice($this));
     }

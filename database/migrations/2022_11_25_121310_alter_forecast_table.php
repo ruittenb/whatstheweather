@@ -17,8 +17,7 @@ return new class extends Migration
     {
         echo "\nAdding new column to forecasts...\n";
         Schema::table('forecasts', function (Blueprint $table) {
-            $advice_no_advice = Advice::where('sort_order', Advice::NO_ADVICE)->first();
-            $table->unsignedBigInteger('advice_id')->default($advice_no_advice->id);
+            $table->unsignedBigInteger('advice_id')->default(Advice::getNoAdviceId());
             $table->foreign('advice_id')
                 ->references('id')
                 ->on('advices')

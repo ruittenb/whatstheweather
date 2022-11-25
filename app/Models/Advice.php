@@ -58,6 +58,15 @@ class Advice extends Model
     ];
 
     /**
+     * Get the ID of the NO_ADVICE record
+     *
+     * @return int
+     */
+    public static function getNoAdviceId() {
+        return static::where('sort_order', Advice::NO_ADVICE)->first()->id;
+    }
+
+    /**
      * @return HasMany
      */
     public function forecasts(): HasMany

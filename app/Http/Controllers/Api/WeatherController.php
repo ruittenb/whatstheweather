@@ -53,9 +53,11 @@ class WeatherController extends Controller
             //$forecast_data = $forecast_table
             //    ->where('city', $city)
             //    ->orderBy('created_at')
-            //    ->get()->all();
-            $forecast_data = Forecast::where('city', $city)->get();
+            //    ->get();
+            $forecast_data = Forecast::where('city', $city)->get()->toArray();
+            //var_dump($forecast_data); // TODO
         } catch (Exception $e) {
+            //print("\nException thrown for '$city': {$e->getMessage()}\n"); // DEBUG
             $forecast_data = [];
         }
 

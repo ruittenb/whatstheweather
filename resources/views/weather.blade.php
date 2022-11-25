@@ -131,7 +131,7 @@
                                 <td>${forecast.temperature}</td>
                                 <td>${forecast.wind_force}</td>
                                 <td>${forecast.wind_direction}</td>
-                                <td>${forecast.advice}</td>
+                                <td>${forecast.advice.description}</td>
                             </tr>
                         `;
                     }
