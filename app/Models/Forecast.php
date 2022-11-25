@@ -32,16 +32,7 @@ class Forecast extends Model
      */
     public function __construct(array $attributes = [])
     {
-        parent::__construct([
-            ...$attributes,
-            'city'           => $attributes['city']           ?: '',
-            'longitude'      => $attributes['longitude']      ?: null,
-            'latitude'       => $attributes['latitude']       ?: null,
-            'temperature'    => $attributes['temperature']    ?: null,
-            'wind_force'     => $attributes['wind_force']     ?: null,
-            'wind_direction' => $attributes['wind_direction'] ?: '',
-            'kind'           => '',
-        ]);
+        parent::__construct($attributes);
         $this->setAttribute('kind', Conversions::kindOfWeather($this));
     }
 
