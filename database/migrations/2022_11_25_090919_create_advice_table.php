@@ -25,12 +25,6 @@ return new class extends Migration
 
             $table->timestamps();
         });
-
-        // TODO do this in separate migration where data is accurately migrated
-        //Schema::table('forecasts', function (Blueprint $table) {
-        //    $table->foreign('advice_id')->references('id')->on('advices')->restrictOnUpdate()->restrictOnDelete();
-        //    $table->dropColumn('kind');
-        //});
     }
 
     /**

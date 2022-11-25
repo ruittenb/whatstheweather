@@ -19,7 +19,6 @@ use stdClass;
  * @property float|null $temperature
  * @property int|null $wind_force
  * @property string $wind_direction
- * @property string $kind
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Advice|null $advice
@@ -88,7 +87,7 @@ class Forecast extends Model
     public function toObject(): stdClass
     {
         return (object)[
-            // The city name is normalized by the OpenWeatherMap API, but not
+            // N.B. the city name is normalized by the OpenWeatherMap API, but not
             // consistently: e.g. 'Gemeente Tilburg' alternates with 'Tilburg'.
             'city' => $this->city,
             'temperature' => $this->temperature,
