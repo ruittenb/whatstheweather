@@ -78,7 +78,6 @@ class Conversions
                 return $advice;
             }
         }
-        //return Advice::where('id'
         return Advice::find(Advice::NO_ADVICE);
     }
 
