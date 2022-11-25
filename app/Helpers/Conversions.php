@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Advice;
 use App\Models\Forecast;
 
 class Conversions
@@ -35,42 +36,50 @@ class Conversions
     }
 
     /**
-     * Convert wind speed in m/s to the Beaufort scale
+     * Convert wind speed in m/s to force on the Beaufort scale
+     *
      * @param float $speed
      * @return int
      */
-    public static function speedToBeaufort(float $speed): int
+    public static function speedToForce(float $speed): int
     {
         match (true) {
-            $speed <  0.4 => $beaufort = 0,
-            $speed <  1.3 => $beaufort = 1,
-            $speed <  3.1 => $beaufort = 2,
-            $speed <  5.4 => $beaufort = 3,
-            $speed <  8.0 => $beaufort = 4,
-            $speed < 10.7 => $beaufort = 5,
-            $speed < 13.9 => $beaufort = 6,
-            $speed < 17.0 => $beaufort = 7,
-            $speed < 20.6 => $beaufort = 8,
-            $speed < 24.1 => $beaufort = 9,
-            $speed < 28.2 => $beaufort = 10,
-            $speed < 32.3 => $beaufort = 11,
-            default       => $beaufort = 12,
+            $speed <  0.4 => $force = 0,
+            $speed <  1.3 => $force = 1,
+            $speed <  3.1 => $force = 2,
+            $speed <  5.4 => $force = 3,
+            $speed <  8.0 => $force = 4,
+            $speed < 10.7 => $force = 5,
+            $speed < 13.9 => $force = 6,
+            $speed < 17.0 => $force = 7,
+            $speed < 20.6 => $force = 8,
+            $speed < 24.1 => $force = 9,
+            $speed < 28.2 => $force = 10,
+            $speed < 32.3 => $force = 11,
+            default       => $force = 12,
         };
-        return $beaufort;
+        return $force;
     }
 
     /**
      * @param Forecast $forecast
-     * @return string
+     * @return Advice
      */
-    public static function forecastToAdvice(Forecast $forecast): string
+    public static function forecastToAdvice(Forecast $forecast): Advice
     {
-        } else if ($forecast->temperature > 20) {
-            $advice = 'Nice for a walk on the beach.';
-        } else {
-            $advice = 'No advice for this weather.';
+        $advices = Advice::all()->sortBy('sort_order');
+        foreach ($advices as $advice) {
+            if (
+                $advice->temperature_min === null || $advice->temperature_min <= $forecast->temperature and
+                $advice->temperature_max === null || $advice->temperature_max >= $forecast->temperature and
+                $advice->wind_force_min  === null || $advice->wind_force_min  <= $forecast->wind_force and
+                $advice->wind_force_max  === null || $advice->wind_force_max  >= $forecast->wind_force
+            ) {
+                return $advice;
+            }
         }
-        return $advice;
+        //return Advice::where('id'
+        return Advice::find(Advice::NO_ADVICE);
     }
 
 }

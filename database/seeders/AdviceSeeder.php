@@ -83,7 +83,7 @@ class AdviceSeeder extends Seeder
 
         // final record
         Advice::factory()->create([
-            'sort_order' => 999_999_999,
+            'sort_order' => Advice::NO_ADVICE, // large integer
             'temperature_min' => null,
             'temperature_max' => null,
             'wind_force_min' => null,
