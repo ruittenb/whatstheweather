@@ -63,22 +63,22 @@ class Conversions
      * @param Forecast $forecast
      * @return string
      */
-    public static function kindOfWeather(Forecast $forecast): string
+    public static function forecastToAdvice(Forecast $forecast): string
     {
         if ($forecast->wind_force > 7) {
-            $kind = 'Batten down the hatches!';
+            $advice = 'Batten down the hatches!';
         } else if ($forecast->temperature < 0) {
-            $kind = 'Wear a warm coat and sweater.';
+            $advice = 'Wear a warm coat and sweater.';
         } else if ($forecast->temperature < 10) {
-            $kind = 'Wear a warm sweater.';
+            $advice = 'Wear a warm sweater.';
         } else if ($forecast->temperature > 30) {
-            $kind = 'Time for a barbecue.';
+            $advice = 'Time for a barbecue.';
         } else if ($forecast->temperature > 20) {
-            $kind = 'Nice for a walk on the beach.';
+            $advice = 'Nice for a walk on the beach.';
         } else {
-            $kind = 'No advice for this weather.';
+            $advice = 'No advice for this weather.';
         }
-        return $kind;
+        return $advice;
     }
 
 }

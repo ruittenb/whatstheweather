@@ -23,7 +23,7 @@ class Forecast extends Model
         'temperature',
         'wind_force',
         'wind_direction',
-        'kind',
+        'advice',
     ];
 
     /**
@@ -40,9 +40,9 @@ class Forecast extends Model
             'temperature'    => $attributes['temperature']    ?: null,
             'wind_force'     => $attributes['wind_force']     ?: null,
             'wind_direction' => $attributes['wind_direction'] ?: '',
-            'kind'           => '',
+            'advice'         => '',
         ]);
-        $this->setAttribute('kind', Conversions::kindOfWeather($this));
+        $this->setAttribute('advice', Conversions::weatherAdvice($this));
     }
 
     /**
@@ -60,7 +60,7 @@ class Forecast extends Model
                 'force' => $this->wind_force,
                 'direction' => $this->wind_direction,
             ],
-            'kind' => $this->kind,
+            'advice' => $this->advice,
         ];
     }
 }

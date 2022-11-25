@@ -47,7 +47,7 @@ class OpenWeatherMapAdapter extends WeatherAdapter
             'temperature'    => $forecast_data->main->temp,
             'wind_force'     => Conversions::speedToBeaufort($forecast_data->wind->speed),
             'wind_direction' => Conversions::angleToCompassDirection($forecast_data->wind->deg),
-            // 'kind' will be determined by Forecast model
+            // 'advice' will be determined by Forecast model
         ]);
     }
 }
