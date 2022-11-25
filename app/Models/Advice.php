@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Advice extends Model
 {
@@ -22,5 +23,13 @@ class Advice extends Model
         'wind_force_max',
         'description',
     ];
+
+    /**
+     * @return HasMany
+     */
+    public function forecasts(): HasMany
+    {
+        return $this->hasMany(Forecast::class);
+    }
 
 }

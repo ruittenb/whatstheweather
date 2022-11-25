@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Helpers\Conversions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use stdClass;
 
 class Forecast extends Model
@@ -33,7 +34,15 @@ class Forecast extends Model
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->setAttribute('advice', Conversions::weatherAdvice($this));
+        $this->setAttribute('advice', Conversions::forecastToAdvice($this)); // TODO fetch correct advice
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function advice(): BelongsTo
+    {
+        return $this->belongsTo(Advice::class, 'advice_id');
     }
 
     /**
@@ -43,8 +52,8 @@ class Forecast extends Model
     public function toObject(): stdClass
     {
         return (object)[
-            // FIXME: This 'city' needs work: sometimes the OpenWeatherMap API returns different
-            // FIXME: names for the same city, like 'Gemeente Tilburg' alternating with 'Tilburg'.
+            // The city name is normalized by the OpenWeatherMap API, but not
+            // consistently: e.g. 'Gemeente Tilburg' alternates with 'Tilburg'.
             'city' => $this->city,
             'temperature' => $this->temperature,
             'wind' => [
