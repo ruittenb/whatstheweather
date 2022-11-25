@@ -5,8 +5,7 @@ return [
     /**
      * Which API to use?
      */
-    'api_name' => 'openweathermap',
-    //'api_name' => 'test',
+    'api_name' => env('APP_ENV') === 'testing' ? 'test' : 'openweathermap',
 
     /**
      * API parameters (API dependent)
