@@ -104,7 +104,7 @@
                             Wind: force ${forecast.wind.force} Bft, from ${forecast.wind.direction}
                         </p>
                         <p>
-                            Weather advice: ${forecast.kind}
+                            Weather advice: ${forecast.advice}
                         </p>
                     `).show();
                 } else {
@@ -131,7 +131,7 @@
                                 <td>${forecast.temperature}</td>
                                 <td>${forecast.wind_force}</td>
                                 <td>${forecast.wind_direction}</td>
-                                <td>${forecast.kind}</td>
+                                <td>${forecast.advice}</td>
                             </tr>
                         `;
                     }

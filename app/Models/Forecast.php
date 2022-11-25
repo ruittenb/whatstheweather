@@ -23,7 +23,7 @@ class Forecast extends Model
         'temperature',
         'wind_force',
         'wind_direction',
-        'kind',
+        'advice',
     ];
 
     /**
@@ -33,7 +33,7 @@ class Forecast extends Model
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->setAttribute('kind', Conversions::kindOfWeather($this));
+        $this->setAttribute('advice', Conversions::weatherAdvice($this));
     }
 
     /**
@@ -51,7 +51,7 @@ class Forecast extends Model
                 'force' => $this->wind_force,
                 'direction' => $this->wind_direction,
             ],
-            'kind' => $this->kind,
+            'advice' => $this->advice,
         ];
     }
 }
