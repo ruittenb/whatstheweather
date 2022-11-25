@@ -45,7 +45,7 @@ class WeatherController extends Controller
      * @param Request $request
      * @return array<stdClass>
      */
-    public function report(Request $request): array
+    public function report(Request $request): array // TODO: Response
     {
         try {
             $city = $request->input('city', 'unknown') ?: 'unknown';
@@ -54,10 +54,9 @@ class WeatherController extends Controller
             //    ->where('city', $city)
             //    ->orderBy('created_at')
             //    ->get();
-            $forecast_data = Forecast::where('city', $city)->get()->toArray();
-            //var_dump($forecast_data); // TODO
+            $forecast_data = Forecast::where('city', $city)->with('advice')->orderBy('created_at')->get()->toArray();
+
         } catch (Exception $e) {
-            //print("\nException thrown for '$city': {$e->getMessage()}\n"); // DEBUG
             $forecast_data = [];
         }
 

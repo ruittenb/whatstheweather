@@ -70,17 +70,15 @@ class Conversions
         $advices = Advice::all()->sortBy('sort_order');
         foreach ($advices as $advice) {
             if (
-                /*
-                $advice->temperature_min === null || $advice->temperature_min <= $forecast->temperature and
-                $advice->temperature_max === null || $advice->temperature_max >= $forecast->temperature and
-                $advice->wind_force_min  === null || $advice->wind_force_min  <= $forecast->wind_force and
-                $advice->wind_force_max  === null || $advice->wind_force_max  >= $forecast->wind_force
-                */ true
+                ($advice->temperature_min === null || (float)$advice->temperature_min <= (float)$forecast->temperature) and
+                ($advice->temperature_max === null || (float)$advice->temperature_max >= (float)$forecast->temperature) and
+                ($advice->wind_force_min  === null || (float)$advice->wind_force_min  <= (float)$forecast->wind_force ) and
+                ($advice->wind_force_max  === null || (float)$advice->wind_force_max  >= (float)$forecast->wind_force )
             ) {
                 return $advice;
             }
         }
-        return Advice::find(Advice::NO_ADVICE);
+        return Advice::find(Advice::getNoAdviceId());
     }
 
 }

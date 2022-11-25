@@ -125,9 +125,11 @@
                             <tr><th>(UTC)</th><th>(°C)</th><th>Force (Bft)</th><th>Direction</th><th></th></tr>
                         `;
                     for (let forecast of forecasts) {
+                        //let created_at = new Date(forecast.created_at).toLocaleString();
+                        let created_at = new Date(forecast.created_at).toISOString();
                         htmlString += `
                             <tr>
-                                <td>${forecast.created_at}</td>
+                                <td>${created_at}</td>
                                 <td>${forecast.temperature}</td>
                                 <td>${forecast.wind_force}</td>
                                 <td>${forecast.wind_direction}</td>

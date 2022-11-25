@@ -29,8 +29,22 @@ class DebugCommand extends Command
      */
     public function handle()
     {
-        $data = Advice::where('sort_order', Advice::NO_ADVICE)->get();
-        $data = Forecast::where('city', 'Paramaribo')->get();
+        \DB::enableQueryLog();
+        //$data = Advice::where('sort_order', Advice::NO_ADVICE)->get();
+        //$data = Forecast::where('city', 'Paramaribo')->get();
+
+        // $data = new Forecast([
+        //     'city' => 'Amsterdam',
+        //     'longitude' => 3,
+        //     'latitude' => 52,
+        //     'temperature' => 25,
+        //     'wind_force' => 5,
+        //     'wind_direction' => 'SSW',
+        // ]);
+        // echo "Advice: direct:{$data->advice_id} indirect: {$data->advice->id}: {$data->advice->description}\n";
+        $forecast = Forecast::find(228);
+        $data = $forecast->toArray();
+        dd(\DB::getQueryLog());
         var_dump($data);
         return Command::SUCCESS;
     }

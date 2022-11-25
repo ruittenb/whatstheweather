@@ -21,6 +21,7 @@ use stdClass;
  * @property string $wind_direction
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $advice_id
  * @property-read \App\Models\Advice|null $advice
  * @method static \Illuminate\Database\Eloquent\Builder|Forecast newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Forecast newQuery()
@@ -96,6 +97,8 @@ class Forecast extends Model
                 'force' => $this->wind_force,
                 'direction' => $this->wind_direction,
             ],
+            'advice_id' => $this->advice_id,
+            'advice->id' => $this->advice->id,
             'advice' => $this->advice->description,
         ];
     }
