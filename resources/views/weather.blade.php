@@ -122,7 +122,7 @@
                         <h2>City: ${forecasts[0].city}</h2>
                         <table class="weather-report">
                             <tr><th>Time</th><th>Temperature</th><th colspan=2>Wind</th><th>Advice</th></tr>
-                            <tr><th></th><th>(°C)</th><th>Force (Bft)</th><th>Direction</th><th></th></tr>
+                            <tr><th>(UTC)</th><th>(°C)</th><th>Force (Bft)</th><th>Direction</th><th></th></tr>
                         `;
                     for (let forecast of forecasts) {
                         htmlString += `
